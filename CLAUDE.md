@@ -60,6 +60,52 @@ The folder structure in `docs/` automatically becomes the site navigation. Blog 
 4. Test locally with `uv run mkdocs serve`
 5. Commit and push - GitHub Actions handles deployment
 
+## Blog Post Requirements
+
+When creating blog posts in `docs/blog/posts/`, follow these requirements:
+
+### File Naming
+Blog post files should include the date in the filename using the format: `YYYY-MM-DD-post-title.md`
+Example: `2025-07-03-hello-world.md`
+
+### Frontmatter Requirements
+Every blog post must include the following frontmatter:
+
+```yaml
+---
+date: YYYY-MM-DD  # Always use the current system date
+categories:
+  - CategoryName  # Include exactly ONE category
+tags:
+  - tag1         # Include 1-3 relevant tags
+  - tag2
+  - tag3
+---
+```
+
+### Categories and Tags Guidelines
+- **Categories**: Choose ONE best matching category. Use existing categories when possible:
+  - General
+  - Technical
+  - Tutorial
+  - Project
+  - Personal
+  - Create new categories only when existing ones don't fit
+  
+- **Tags**: Select 1-3 specific tags that describe the content. Prefer existing tags but create new ones when needed. Common tags include:
+  - introduction
+  - tutorial
+  - announcement
+  - update
+  - tips
+  - tools
+
+### Additional Optional Fields
+- `authors`: List of authors
+- `description`: Brief post description
+
+The RSS plugin requires proper frontmatter to generate feeds correctly.
+
 ## Notes
 
 - The `mkdocs-roamlinks-plugin` has a deprecation warning about `warning_filter` but it still works
