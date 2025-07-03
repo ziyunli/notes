@@ -1,6 +1,6 @@
 # ABOUTME: MkDocs configuration for converting Obsidian notes to static website
 # ABOUTME: Configures Material theme, markdown extensions, and plugins for blog/wiki functionality
-site_name: obsidian-mkdocs template
+site_name: Yun's Knowledge Garden
 
 theme:
     name: 'material'
