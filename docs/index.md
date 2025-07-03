@@ -8,7 +8,7 @@ This site serves as my personal knowledge repository where:
 
 - I document notes from articles and books I read
 - Share my thoughts and comments on various topics
-- Build connections between different ideas using Obsidian-style [[wikilinks]]
+- Build connections between different ideas using Obsidian-style `[[wikilinks]]`
 
 ## The Collaborative Process
 
@@ -22,7 +22,7 @@ I work together with Claude Code (Claudia) to organize this knowledge:
 
 1. **Daily Notes**: I create blog posts with my reading notes and reflections
 2. **Topic Extraction**: Common themes are identified and organized into topic pages
-3. **Cross-Linking**: Everything is connected using [[wikilinks]] for easy navigation
+3. **Cross-Linking**: Everything is connected using `[[wikilinks]]` for easy navigation
 4. **Continuous Growth**: The knowledge base evolves as I read and think more
 
 ## Technical Foundation
