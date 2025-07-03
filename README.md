@@ -1,6 +1,6 @@
-# Obsidian to MkDocs Publishing Template
+# Obsidian to MkDocs Publishing System
 
-A streamlined template for publishing your [Obsidian](https://obsidian.md/) notes as a beautiful static website using [MkDocs](https://www.mkdocs.org/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+An extended implementation of the [obsidian-publish-mkdocs](https://github.com/jobindjohn/obsidian-publish-mkdocs) template for publishing [Obsidian](https://obsidian.md/) notes as a beautiful static website using [MkDocs](https://www.mkdocs.org/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
 ## Features
 
@@ -14,36 +14,27 @@ A streamlined template for publishing your [Obsidian](https://obsidian.md/) note
 
 ## Quick Start
 
-1. **Use this template** - Click "Use this template" button or [create a new repo from this template](https://github.com/jobindjohn/obsidian-publish-mkdocs/generate)
-
-2. **Clone to your Obsidian vault**
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-   ```
-
-3. **Add your notes** - Place the notes you want to publish in the `docs/` folder
-
-4. **Install dependencies** (requires [uv](https://github.com/astral-sh/uv))
+1. **Install dependencies** (requires [uv](https://github.com/astral-sh/uv))
    ```bash
    uv sync
    ```
 
-5. **Preview locally**
+2. **Add your notes** - Place the notes you want to publish in the `docs/` folder
+
+3. **Preview locally**
    ```bash
    uv run mkdocs serve
    ```
    Visit http://localhost:8000 to see your site
 
-6. **Deploy** - Push to GitHub and the site will automatically deploy to GitHub Pages
+4. **Deploy** - Push to GitHub and the site will automatically deploy to GitHub Pages
    ```bash
    git add .
    git commit -m "Add my notes"
    git push
    ```
 
-7. **Enable GitHub Pages** - Go to Settings → Pages → Source: Deploy from a branch → Branch: `gh-pages`
-
-Your site will be available at `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
+The site is automatically deployed via GitHub Actions and available at your GitHub Pages URL.
 
 ## Project Structure
 
