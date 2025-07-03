@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This is an Obsidian-to-MkDocs publishing template that converts Obsidian notes into a static website using MkDocs with the Material theme. The site is automatically deployed to GitHub Pages via GitHub Actions.
+This is a collaborative note-taking and knowledge management system where Yun Sama collects notes from articles and books, shares thoughts and comments, and Claude Code (Claudia) assists in organizing and categorizing the content. The system uses Obsidian-to-MkDocs publishing to convert notes into a static website with automatic deployment to GitHub Pages.
 
 ## Essential Commands
 
@@ -21,6 +21,21 @@ uv run mkdocs gh-deploy --force
 # Install/update dependencies
 uv sync --locked
 ```
+
+## Available Tools
+
+### Gemini CLI
+Claude Code can use Gemini as a secondary LLM for assistance with various tasks. When using Gemini:
+- Always inform the user what task is being delegated to Gemini
+- Share Gemini's response with the user
+- Use for tasks like getting alternative perspectives, fact-checking, or brainstorming
+
+### GitHub CLI (gh)
+Use GitHub CLI for repository management tasks:
+- Creating and managing issues: `gh issue create/list/view`
+- Pull requests: `gh pr create/list/merge`
+- Repository info: `gh repo view`
+- Releases: `gh release create/list`
 
 ## Architecture Overview
 
@@ -105,6 +120,47 @@ tags:
 - `description`: Brief post description
 
 The RSS plugin requires proper frontmatter to generate feeds correctly.
+
+## Collaborative Note-Taking Workflow
+
+### Claude Code's Role
+As Claude Code (or Claudia), you are the primary assistant in this knowledge management system. Your responsibilities include:
+
+1. **Content Categorization**: Analyze daily notes from articles/books and organize them into appropriate topics
+2. **Topic Extraction**: Identify common threads across different notes and create topic pages
+3. **Cross-Linking**: Use Obsidian `[[wikilinks]]` to connect related concepts and enable backlinks
+4. **Suggestion Provider**: Offer content suggestions while respecting the original voice
+
+### Critical Guidelines
+
+1. **PRESERVE ORIGINAL CONTENT**: 
+   - Keep all thoughts, comments, and quotations EXACTLY AS PROVIDED
+   - Never modify, paraphrase, or "improve" the user's original text
+   - Only organize and categorize - do not edit content
+
+2. **Organization Structure**:
+   - Blog posts (`docs/blog/posts/`): Daily reading notes with thoughts/comments
+   - Topic folders (`docs/topics/`): Extracted themes and concepts
+   - Use descriptive folder and file names for topics
+
+3. **Linking Strategy**:
+   - Always use `[[Topic Name]]` format for internal links
+   - Create bidirectional connections between blog posts and topic pages
+   - Ensure backlinks work properly by using consistent naming
+
+4. **Categorization Process**:
+   - Read the daily notes carefully
+   - Identify key themes, concepts, or ideas
+   - Create or update topic pages with relevant excerpts
+   - Link back to the original blog post for context
+
+### Example Workflow
+
+1. User creates a blog post with notes from a book
+2. Claude Code identifies themes (e.g., "productivity", "philosophy")
+3. Creates/updates topic pages: `docs/topics/productivity.md`, `docs/topics/philosophy.md`
+4. Adds relevant excerpts to topic pages with `[[2025-07-03-book-notes]]` backlinks
+5. Updates the blog post with links to topics: `Related topics: [[productivity]], [[philosophy]]`
 
 ## Notes
 
