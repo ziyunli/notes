@@ -1,0 +1,12 @@
+# ABOUTME: Python project configuration for Obsidian-to-MkDocs publishing system
+# ABOUTME: Manages MkDocs and plugin dependencies for static site generation
+[project]
+name = "notes"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "mkdocs-material>=9.6.15",
+    "mkdocs-roamlinks-plugin>=0.3.2",
+    "mkdocs-rss-plugin>=1.17.3",
+]
