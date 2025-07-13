@@ -66,8 +66,21 @@ RUN npm install -g @anthropic-ai/claude-code
 # Switch back to user
 USER user
 
+# Install uv for the user
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/home/user/.local/bin:${PATH}"
+
 # Set working directory
 WORKDIR /workspace
+
+# Copy project files
+COPY --chown=user:user pyproject.toml uv.lock* ./
+
+# Install project dependencies
+RUN uv sync --locked || uv sync
+
+# Expose port 8000 for mkdocs serve
+EXPOSE 8000
 
 # Set shell to bash
 SHELL ["/bin/bash", "-c"]
