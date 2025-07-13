@@ -1,9 +1,9 @@
-FROM archlinux:latest
+FROM alpine:latest
 
 # Update system and install base dependencies
-RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm \
-    base-devel \
+RUN apk update && apk upgrade && \
+    apk add --no-cache \
+    alpine-sdk \
     git \
     curl \
     wget \
@@ -11,15 +11,16 @@ RUN pacman -Syu --noconfirm && \
     neovim \
     sudo \
     openssh \
-    ca-certificates
+    ca-certificates \
+    bash \
+    shadow
 
 # Install development tools
-RUN pacman -S --noconfirm \
-    python \
-    python-pip \
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
     nodejs \
     npm \
-    pnpm \
     yarn \
     go \
     jq \
@@ -30,15 +31,19 @@ RUN pacman -S --noconfirm \
     protobuf \
     zip
 
-# Install useful tools
-RUN pacman -S --noconfirm \
-    ast-grep \
-    github-cli \
-    fd \
-    ripgrep
+# Install ripgrep and fd
+RUN apk add --no-cache \
+    ripgrep \
+    fd
+
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Install github-cli from edge repository
+RUN apk add --no-cache github-cli --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
 
 # Create a regular user with UID 1000
-RUN useradd -m -u 1000 -G wheel -s /bin/bash user && \
+RUN adduser -D -u 1000 -s /bin/bash user && \
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Switch to user for installations
@@ -49,17 +54,17 @@ WORKDIR /home/user
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/home/user/.cargo/bin:${PATH}"
 
-# Switch back to root for system packages
+# Install ast-grep via cargo
+RUN cargo install ast-grep
+
+# Switch back to root for global npm install
 USER root
 
-# Clean package cache
-RUN pacman -Scc --noconfirm
+# Install Claude Code globally
+RUN npm install -g @anthropic-ai/claude-code
 
 # Switch back to user
 USER user
-
-# Install Claude Code globally (user has npm permissions via sudo)
-RUN sudo npm install -g @anthropic-ai/claude-code
 
 # Set working directory
 WORKDIR /workspace
