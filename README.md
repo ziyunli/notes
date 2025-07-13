@@ -135,6 +135,35 @@ uv run mkdocs build
 uv run mkdocs gh-deploy --force
 ```
 
+### Docker Container
+
+You can also run the development environment in a Docker container:
+
+```bash
+# Build the Docker container
+docker build -t claude-dev:latest -f Dockerfile .
+
+# Run claudex in the container environment
+# This mounts the current directory and preserves your Claude/GitHub configs
+docker run -it --rm \
+  -v $(pwd):/workspace \
+  -v ~/.claude:/home/user/.claude \
+  -v ~/.claude.json:/home/user/.claude.json \
+  -v ~/.config/gh:/home/user/.config/gh \
+  claude-dev
+```
+
+For convenience, you can add this alias to your shell configuration:
+
+```bash
+alias claudex='docker run -it --rm \
+  -v $(pwd):/workspace \
+  -v ~/.claude:/home/user/.claude \
+  -v ~/.claude.json:/home/user/.claude.json \
+  -v ~/.config/gh:/home/user/.config/gh \
+  claude-dev'
+```
+
 ## Requirements
 
 - Python 3.12+
