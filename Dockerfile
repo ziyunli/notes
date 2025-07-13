@@ -29,7 +29,8 @@ RUN apk add --no-cache \
     tree \
     unzip \
     protobuf \
-    zip
+    zip \
+    tzdata
 
 # Install ripgrep and fd
 RUN apk add --no-cache \
