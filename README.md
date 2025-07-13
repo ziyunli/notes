@@ -135,33 +135,43 @@ uv run mkdocs build
 uv run mkdocs gh-deploy --force
 ```
 
-### Docker Container
+### Docker Container & Makefile Commands
 
-You can also run the development environment in a Docker container:
+The project includes a Docker setup and Makefile for containerized development:
 
 ```bash
-# Build the Docker container
-docker build -t claude-dev:latest -f Dockerfile .
+# Run Claude Code in container with current directory mounted
+make claudex
 
-# Run claudex in the container environment
-# This mounts the current directory and preserves your Claude/GitHub configs
-docker run -it --rm \
-  -v $(pwd):/workspace \
-  -v ~/.claude:/home/user/.claude \
-  -v ~/.claude.json:/home/user/.claude.json \
-  -v ~/.config/gh:/home/user/.config/gh \
-  claude-dev
+# Run mkdocs serve in container with port forwarding (http://localhost:8000)
+make serve
+
+# Build Docker image
+make build
+
+# Remove Docker image
+make clean
+
+# Show available commands
+make help
 ```
 
-For convenience, you can add this alias to your shell configuration:
+The Makefile provides convenient shortcuts for Docker operations. Both `claudex` and `serve` commands automatically:
+- Mount the current directory to `/workspace` 
+- Forward port 8000 for mkdocs development server
+- Use the `notes-app` Docker image with uv and all dependencies pre-installed
+
+**Manual Docker commands:**
 
 ```bash
-alias claudex='docker run -it --rm \
-  -v $(pwd):/workspace \
-  -v ~/.claude:/home/user/.claude \
-  -v ~/.claude.json:/home/user/.claude.json \
-  -v ~/.config/gh:/home/user/.config/gh \
-  claude-dev'
+# Build the container
+docker build -t notes-app .
+
+# Run Claude Code
+docker run -it --rm -v $(PWD):/workspace -p 8000:8000 notes-app
+
+# Run mkdocs serve with port forwarding
+docker run -it --rm -v $(PWD):/workspace -p 8000:8000 notes-app uv run mkdocs serve --dev-addr=0.0.0.0:8000
 ```
 
 ## Requirements
