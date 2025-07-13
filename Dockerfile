@@ -50,14 +50,6 @@ RUN adduser -D -u 1000 -s /bin/bash user && \
 # Switch to user for installations
 USER user
 WORKDIR /home/user
-
-# Install Rust as user
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/home/user/.cargo/bin:${PATH}"
-
-# Install ast-grep via cargo
-RUN cargo install ast-grep
-
 # Switch back to root for global npm install
 USER root
 
