@@ -81,4 +81,4 @@ EXPOSE 8000
 # Set shell to bash
 SHELL ["/bin/bash", "-c"]
 
-CMD ["claude", "--dangerously-skip-permissions"]
+CMD ["/bin/bash"]
