@@ -6,6 +6,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a collaborative note-taking and knowledge management system where Yun Sama collects notes from articles and books, shares thoughts and comments, and Claude Code (Claudia) assists in organizing and categorizing the content. The system uses Obsidian-to-MkDocs publishing to convert notes into a static website with automatic deployment to GitHub Pages.
 
+## Quick Start
+
+1. **Install dependencies** (requires [uv](https://github.com/astral-sh/uv))
+   ```bash
+   uv sync
+   ```
+
+2. **Add your notes** - Place the notes you want to publish in the `docs/` folder
+
+3. **Preview locally**
+   ```bash
+   uv run mkdocs serve
+   ```
+   Visit http://localhost:8000 to see your site
+
+4. **Deploy** - Push to GitHub and the site will automatically deploy to GitHub Pages
+   ```bash
+   git add .
+   git commit -m "Add my notes"
+   git push
+   ```
+
+The site is automatically deployed via GitHub Actions and available at your GitHub Pages URL.
+
 ## Essential Commands
 
 ```bash
@@ -51,14 +75,19 @@ The system uses a simple pipeline:
 ## Content Organization
 
 ```
-docs/                  # All publishable content
-├── index.md          # Homepage
-├── blog/             # Blog section
-│   ├── index.md     # Blog homepage  
-│   └── posts/       # Individual blog posts (with frontmatter)
-└── [sections]/      # Other content sections
+.
+├── docs/                 # Your notes go here
+│   ├── index.md         # Homepage
+│   ├── blog/            # Blog section
+│   │   ├── index.md     # Blog homepage
+│   │   └── posts/       # Blog posts
+│   └── ...              # Your other notes/sections
+├── mkdocs.yml           # MkDocs configuration
+├── pyproject.toml       # Python dependencies
+└── .github/
+    └── workflows/
+        └── ci.yml       # GitHub Actions workflow
 ```
-
 The folder structure in `docs/` automatically becomes the site navigation. Blog posts in `docs/blog/posts/` need frontmatter with date, categories, and tags for RSS feed generation.
 
 ## Key Configuration Files
@@ -106,7 +135,7 @@ tags:
   - Project
   - Personal
   - Create new categories only when existing ones don't fit
-  
+
 - **Tags**: Select 1-3 specific tags that describe the content. Prefer existing tags but create new ones when needed. Common tags include:
   - introduction
   - tutorial
@@ -121,6 +150,35 @@ tags:
 
 The RSS plugin requires proper frontmatter to generate feeds correctly.
 
+## Supported Features
+
+- **Wikilinks**: `[[My Note]]` → automatic link to `My Note.md`
+- **Math**: `$E = mc^2$` for inline, `$$...$$` for blocks
+- **Diagrams**: Mermaid diagrams in code blocks
+- **Task Lists**: `- [ ] Todo item`
+- **Footnotes**: `Text[^1]` and `[^1]: Footnote`
+
+## Customization
+
+### Site Configuration
+
+Edit `mkdocs.yml` to customize:
+- Site name and description
+- Theme colors
+- Navigation structure
+- Enabled plugins
+
+### Theme Colors
+
+In `mkdocs.yml`, modify the palette section:
+```yaml
+theme:
+  palette:
+    - scheme: default
+      primary: pink    # Change primary color
+      accent: indigo   # Change accent color
+```
+
 ## Collaborative Note-Taking Workflow
 
 ### Claude Code's Role
@@ -133,7 +191,7 @@ As Claude Code (or Claudia), you are the primary assistant in this knowledge man
 
 ### Critical Guidelines
 
-1. **PRESERVE ORIGINAL CONTENT**: 
+1. **PRESERVE ORIGINAL CONTENT**:
    - Keep all thoughts, comments, and quotations EXACTLY AS PROVIDED
    - Never modify, paraphrase, or "improve" the user's original text
    - Only organize and categorize - do not edit content

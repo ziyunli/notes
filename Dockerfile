@@ -56,6 +56,9 @@ USER root
 # Install Claude Code globally
 RUN npm install -g @anthropic-ai/claude-code
 
+# Install gemini-cli
+RUN npm install -g @google/gemini-cli
+
 # Switch back to user
 USER user
 
